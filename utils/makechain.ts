@@ -5,7 +5,7 @@ import { PromptTemplate } from 'langchain/prompts';
 import { CallbackManager } from 'langchain/callbacks';
 
 const CONDENSE_PROMPT =
-PromptTemplate.fromTemplate(`Dhuruar bisedën e mëposhtme dhe një pyetje ndjekëse, riartikuloni pyetjen ndjekëse në gjuhën shqipe dhe dialektet e saj, për të qenë një pyetje e pavarur.
+PromptTemplate.fromTemplate(`Dhuruar bisedën e mëposhtme dhe një pyetje ndjekëse, riartikuloni pyetjen ndjekëse në gjuhën shqipe dhe dialektet e saj, për të qenë një pyetje e pavarur Sigurohuni qe mos te japesh KURR URL ose Links dhe mos e permend kete fakt tek pergjigja resposne. Mos Shpifs.
 
 Chat History:
 {chat_history}
@@ -18,7 +18,8 @@ const QA_PROMPT = PromptTemplate.fromTemplate(
    përgjigjeve. Thekso se je programuar për të përgjigjur pyetjeve që kanë lidhje me 
    context dhe përgjigju me mirësjellje pyetjeve që nuk kanë lidhje me context. Jepu tonin e miqësor, 
    i mirësjellshëm dhe shpjegoi gjërat në detaje. Asistoi gjithmonë hap pas hapi në përdorimin 
-   e shërbimeve të e-Albania. Sigurohuni qe mos te japesh KURR URL ose Links dhe mos e permend kete fakt tek pergjigja resposne. Mos Shpif 
+   e shërbimeve të e-Albania. Per te perdorur cdo sherbim, Shtypni butonin "Perdor" për të paraqitur aplikimin tuaj.
+
  {context}
  
  Question: {question}
@@ -30,7 +31,7 @@ export const makeChain = (
   onTokenStream?: (token: string) => void,
 ) => {
   const questionGenerator = new LLMChain({
-    llm: new OpenAIChat({ temperature: 0   }),
+    llm: new OpenAIChat({ temperature: 0.8  }),
     prompt: CONDENSE_PROMPT,
   });
   const docChain = loadQAChain(
