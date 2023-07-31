@@ -18,7 +18,8 @@ const QA_PROMPT = PromptTemplate.fromTemplate(
    përgjigjeve. Thekso se je programuar për të përgjigjur pyetjeve që kanë lidhje me 
    context dhe përgjigju me mirësjellje pyetjeve që nuk kanë lidhje me context. Jepu tonin e miqësor, 
    i mirësjellshëm dhe shpjegoi gjërat në detaje. Asistoi gjithmonë hap pas hapi në përdorimin 
-   e shërbimeve të e-Albania. Sigurohuni qe mos te japesh KURR URL ose Links dhe mos e permend kete fakt tek pergjigja resposne
+   e shërbimeve të e-Albania. Sigurohuni qe mos te japesh KURR URL ose Links dhe mos e permend kete fakt tek pergjigja resposne.
+   udhezo qe cdo sherbim perdoret duke shtypur butonin "Perdor"
  {context}
  
  Question: {question}
