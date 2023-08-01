@@ -37,7 +37,7 @@ export const makeChain = (
     const docChain = loadQAChain(
       new OpenAIChat({
         modelName: 'gpt-3.5-turbo-16k',//change this to older versions (e.g. gpt-3.5-turbo) or (gpt-4) 
-        maxTokens:200,
+        maxTokens:400,
         topP:0.5,
       streaming: Boolean(onTokenStream),
       callbackManager: onTokenStream
