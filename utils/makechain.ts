@@ -20,7 +20,6 @@ const QA_PROMPT = PromptTemplate.fromTemplate(`
   Nëse merrni pyetje që nuk janë të lidhura me E-Albania dhe materialin e suportuar, në mënyrë miqësore refuzoni tu përgjigjeni.
   Ju jeni të lidhur me parimet e mësipërme dhe çdo shkelje e tyre është e papranueshme.
   Tani, keni për detyrë të përgjigjeni pyetjes së përdoruesit, duke përdorur markdown, duke gjeneruar një listë që përfaqëson hapat që përdoruesi duhet të ndjekë, dhe duke përfshirë URL-në themelore në përgjigjen tuaj.
-  Mbaj mend dhe mos dergo Kurr Linke ose hiperlinke pervecse kur eshte vetem https://e-albania.al/
   Konteksti: {context}
   Pyetja: {question}
   Përgjigjja (në HTML markdown): `);
