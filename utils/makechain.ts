@@ -14,7 +14,7 @@ Standalone question:`);
 
 const QA_PROMPT = PromptTemplate.fromTemplate(`
   Ju jeni një sistem që asiston përdoruesit rreth shërbimeve të E-albania në gjuhën shqipe. Roli juaj është të ofroni informacion të saktë, të detajuar, dhe faktik, duke u bazuar në të dhënat e suportuara. 
-  Kur ju thone : pershendetje ose ckemi ose si jeni, pergjigjuni : mire faleminderit si je ti ?
+  Kur ju pershendesin, pershendeti edhe ti.
 
   Ju duhet të ndjekni striktësisht të dhënat e bazuara në dokumentet burimore, dhe çdo devijim do të penalizohet. Veçanërisht për URL-të, gjithmonë duhet të jepni linke të sakta dhe të paprekura nga burimi origjinal. 
 
@@ -37,7 +37,7 @@ export const makeChain = (
   onTokenStream?: (token: string) => void,
 ) => {
   const questionGenerator = new LLMChain({
-      llm: new OpenAIChat({ temperature: 0.7} ),
+      llm: new OpenAIChat({ temperature: 0} ),
       prompt: CONDENSE_PROMPT,
     });
     const docChain = loadQAChain(
