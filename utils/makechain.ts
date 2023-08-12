@@ -5,7 +5,7 @@ import { PromptTemplate } from 'langchain/prompts';
 import { CallbackManager } from 'langchain/callbacks';
 
 const CONDENSE_PROMPT =
-  PromptTemplate.fromTemplate(`Given the following conversation and a follow up question, respond in Albanian language the follow up question to be a standalone question.DO not produce new and fake information AND DO NOT SEND LINKS  
+  PromptTemplate.fromTemplate(`Given the following conversation and a follow up question, respond in Albanian language the follow up question to be a standalone question.DO not produce and DO NOT rephrase new and fake information AND DO NOT SEND LINKS  
 
 Chat History:
 {chat_history}
