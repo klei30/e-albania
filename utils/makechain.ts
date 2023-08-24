@@ -36,7 +36,7 @@ export const makeChain = (
   onTokenStream?: (token: string) => void,
 ) => {
   const questionGenerator = new LLMChain({
-      llm: new OpenAIChat({ temperature: 0.2} ),
+      llm: new OpenAIChat({ temperature: 0.5} ),
       prompt: CONDENSE_PROMPT,
     });
     const docChain = loadQAChain(
