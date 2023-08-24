@@ -36,13 +36,13 @@ export const makeChain = (
   onTokenStream?: (token: string) => void,
 ) => {
   const questionGenerator = new LLMChain({
-      llm: new OpenAIChat({ temperature: 0.1} ),
+      llm: new OpenAIChat({ temperature: 0.5} ),
       prompt: CONDENSE_PROMPT,
     });
     const docChain = loadQAChain(
       new OpenAIChat({
         modelName: 'gpt-3.5-turbo-16k',//change this to older versions (e.g. gpt-3.5-turbo) or (gpt-4) 
-        maxTokens:4000,
+        maxTokens:6000,
       streaming: Boolean(onTokenStream),
       callbackManager: onTokenStream
         ? CallbackManager.fromHandlers({
