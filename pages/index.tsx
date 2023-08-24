@@ -323,10 +323,7 @@ export default function Home() {
             )}
           </main>
         </div>
-        <footer className="m-auto p-14">
-          <a href="https://kleialiaj.vercel.app/">
-            Powered by AI. Demo built by Klei.
-          </a>
+        <footer className="m-auto p-1">
         </footer>
       </Layout>
     </>
