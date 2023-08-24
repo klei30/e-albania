@@ -5,7 +5,7 @@ import { PromptTemplate } from 'langchain/prompts';
 import { CallbackManager } from 'langchain/callbacks';
 
 const CONDENSE_PROMPT = PromptTemplate.fromTemplate(`
-Given the following conversation and a follow up question, craft the follow up question so that it is standalone while retaining its exact context.
+Given the following conversation and a follow up question, craft the follow up question only in Albanian language so that it is standalone while retaining its exact context.
 
 Chat History:
 {chat_history}
@@ -42,7 +42,7 @@ export const makeChain = (
     const docChain = loadQAChain(
       new OpenAIChat({
         modelName: 'gpt-3.5-turbo-16k',//change this to older versions (e.g. gpt-3.5-turbo) or (gpt-4) 
-        maxTokens:6000,
+        maxTokens:4000,
         topP:0.8,
         presencePenalty:-0.5,
       streaming: Boolean(onTokenStream),
