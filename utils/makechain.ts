@@ -44,7 +44,6 @@ export const makeChain = (
         modelName: 'gpt-3.5-turbo-16k',//change this to older versions (e.g. gpt-3.5-turbo) or (gpt-4) 
         maxTokens:4000,
         topP: 0.5,
-        frequencyPenalty: -0.5,        
       streaming: Boolean(onTokenStream),
       callbackManager: onTokenStream
         ? CallbackManager.fromHandlers({
