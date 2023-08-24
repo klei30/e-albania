@@ -165,7 +165,7 @@ export default function Home() {
       <Layout>
         <div className="mx-auto flex flex-col gap-4">
         <h1 className="text-xl font-bold leading-[1.1] tracking-tighter text-center text-white">
-    Komuniko me Agjentin Inteligjent per cdo pyetje
+    Komuniko me Agjentin Inteligjent për cdo pyetje
 </h1>
           <main className={styles.main}>
             <div className={styles.cloud}>
