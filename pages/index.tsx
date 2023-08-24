@@ -27,7 +27,7 @@ export default function Home() {
   }>({
     messages: [
       {
-        message: 'Pershendetje,ndodhem ketu per tju ndihmuar rreth pyetjeve qe keni',
+        message: 'Përshëndetje! Unë jam asistenti yt dixhital. Më shkruaj kërkesën tënde që të të ndihmoj.',
         type: 'apiMessage',
       },
     ],
@@ -286,8 +286,8 @@ export default function Home() {
                     name="userInput"
                     placeholder={
                       loading
-                        ? 'Duke kerkuar pergjigjen...'
-                        : 'Me bej pyetjen...  ?'
+                        ? 'Duke kërkuar përgjigjen...'
+                        : 'Shkruaj këtu...'
                     }
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
