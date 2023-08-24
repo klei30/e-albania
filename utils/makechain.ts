@@ -4,8 +4,8 @@ import { PineconeStore } from 'langchain/vectorstores';
 import { PromptTemplate } from 'langchain/prompts';
 import { CallbackManager } from 'langchain/callbacks';
 
-const CONDENSE_PROMPT = PromptTemplate.fromTemplate(`
-Given the following conversation and a follow up question, craft the follow up question only in Albanian language so that it is standalone while retaining its exact context.
+const CONDENSE_PROMPT =
+  PromptTemplate.fromTemplate(`Given the following conversation  respond only in ALbanian language and a follow up question, craft the follow up question so that it is standalone while retaining its exact context.
 
 Chat History:
 {chat_history}
@@ -13,21 +13,21 @@ Chat History:
 Follow Up Input: 
 {question}
 
-Standalone Question:
-`);
+Standalone Question:`);
 
 const QA_PROMPT = PromptTemplate.fromTemplate(`
 Ju jeni një asistent që ndihmon përdoruesit me informacion rreth shërbimeve të E-albania në gjuhën shqipe. 
 Ju duhet të ofroni përgjigje të saktë, të detajuara dhe faktike, duke u bazuar vetëm në dokumentet e përfshira.
 
-Është e rëndësishme të ndjekni striktësisht informacionin nga dokumentet origjinale.
+Është e rëndësishme të ndjekni striktësisht informacionin nga dokumentet origjinale. Kjo përfshin edhe lidhjet URL: ju duhet gjithmonë të jepni linke të sakta dhe origjinale, dhe MOS të krijoni ose modifikoni lidhje që nuk janë përfshirë në dokumentet origjinale.
 
-Nëse ju pyesin për diçka që nuk është në dokumentet e përfshira, refuzoni të përgjigjeni me korrektësi. 
+Nëse ju pyesin për diçka që nuk është në dokumentet e përfshira, refuzojeni të përgjigjeni me korrektësi. 
 Përgjigjet tuaja duhet të jenë miqësore dhe të orientuara ndaj përdoruesit.
+Nese ju pershendesin, pershendeti edhe ti miqesisht
 
 Konteksti: {context}
 Pyetja: {question}
-Përgjigjja (në HTML markdown):`);
+Përgjigjja (në HTML markdown): `);
 
 
 
@@ -42,11 +42,11 @@ export const makeChain = (
     const docChain = loadQAChain(
       new OpenAIChat({
         modelName: 'gpt-3.5-turbo-16k',//change this to older versions (e.g. gpt-3.5-turbo) or (gpt-4) 
-        maxTokens:6000,
         maxTokens:4000,
         topP: 0.5,
         frequencyPenalty: -0.5,
         presencePenalty: 0.5,
+        
       streaming: Boolean(onTokenStream),
       callbackManager: onTokenStream
         ? CallbackManager.fromHandlers({
@@ -65,6 +65,6 @@ export const makeChain = (
     combineDocumentsChain: docChain,
     questionGeneratorChain: questionGenerator,
     returnSourceDocuments: true,
-    k: 5, //number of source documents to return
+    k: 1, //number of source documents to return
   });
 };
