@@ -346,9 +346,9 @@ export default function Home() {
           </main>
         </div>
         <footer className="m-auto p-1">
-          {/* <a href="https://kleialiaj.vercel.app/">
+          <a href="https://kleialiaj.vercel.app/">
             Powered by AI. Demo built by Klei.
-          </a> */}
+          </a> 
         </footer>
       </Layout>
     </>
