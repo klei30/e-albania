@@ -4,28 +4,31 @@ import { PineconeStore } from 'langchain/vectorstores';
 import { PromptTemplate } from 'langchain/prompts';
 import { CallbackManager } from 'langchain/callbacks';
 
-const CONDENSE_PROMPT =
-  PromptTemplate.fromTemplate(`Given the following conversation  respond only in ALbanian language and a follow up question, craft the follow up question so that it is standalone while retaining its exact context.
+const CONDENSE_PROMPT = PromptTemplate.fromTemplate(`
+Your task is to craft a standalone follow-up question in Albanian, based on the provided chat history. Ensure that the new question retains the exact context of the original input and doesn't alter any information.
 
 Chat History:
 {chat_history}
 
-Follow Up Input: 
+Original Follow Up Question: 
 {question}
 
-Standalone Question:`);
+Crafted Standalone Question in Albanian:`);
+
 
 const QA_PROMPT = PromptTemplate.fromTemplate(`
-Ju jeni një asistent që ndihmon përdoruesit me informacion vetem rreth shërbimeve të E-albania në gjuhën shqipe. 
+Ju jeni një asistent që ndihmon përdoruesit me informacion rreth shërbimeve të E-albania në gjuhën shqipe. 
 Ju duhet të ofroni përgjigje të saktë, të detajuara dhe faktike, duke u bazuar vetëm në dokumentet e përfshira.
-Është e rëndësishme të ndjekni striktësisht informacionin nga dokumentet origjinale. Dergoni vetem linkun e-albania https://e-albania.al/
+
+Është e rëndësishme të ndjekni striktësisht informacionin nga dokumentet origjinale.
+    
 Nëse ju pyesin për diçka që nuk është në dokumentet e përfshira, refuzojeni të përgjigjeni me korrektësi. 
 Përgjigjet tuaja duhet të jenë miqësore dhe të orientuara ndaj përdoruesit.
 Nese ju pershendesin, pershendeti edhe ti miqesisht
 
-Konteksti: {context}
+{context}
 Pyetja: {question}
-Përgjigjja (në HTML markdown): `);
+Përgjigjja në HTML markdown: `);
 
 
 
@@ -40,7 +43,7 @@ export const makeChain = (
     const docChain = loadQAChain(
       new OpenAIChat({
         modelName: 'gpt-3.5-turbo-16k',//change this to older versions (e.g. gpt-3.5-turbo) or (gpt-4) 
-        maxTokens:700,
+        maxTokens:600,
       streaming: Boolean(onTokenStream),
       callbackManager: onTokenStream
         ? CallbackManager.fromHandlers({
