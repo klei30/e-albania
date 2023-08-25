@@ -19,6 +19,8 @@ export default function Home() {
   const [loading, setLoading] = useState<boolean>(false);
   const [sourceDocs, setSourceDocs] = useState<Document[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [abortController, setAbortController] = useState<AbortController | null>(null);
+
   const [messageState, setMessageState] = useState<{
     messages: Message[];
     pending?: string;
@@ -27,7 +29,7 @@ export default function Home() {
   }>({
     messages: [
       {
-        message: 'Përshëndetje! Unë jam asistenti yt dixhital. Më shkruaj kërkesën tënde që të të ndihmoj.',
+        message: 'Pershendetje,ndodhem ketu per tju ndihmuar rreth pyetjeve qe keni',
         type: 'apiMessage',
       },
     ],
@@ -74,6 +76,7 @@ export default function Home() {
     setMessageState((state) => ({ ...state, pending: '' }));
 
     const ctrl = new AbortController();
+    setAbortController(ctrl);    
 
     try {
       fetchEventSource('/api/chat', {
@@ -126,6 +129,18 @@ export default function Home() {
     }
   }
 
+  function handleStop(e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault(); // This will prevent the form from submitting.
+    if (abortController) {
+      abortController.abort();
+      setAbortController(null); // Reset the controller
+    }
+    setLoading(false); // Stop the loading state
+    setQuery('');
+}
+
+  
+
   //prevent empty submissions
   const handleEnter = useCallback(
     (e: any) => {
@@ -165,7 +180,7 @@ export default function Home() {
       <Layout>
         <div className="mx-auto flex flex-col gap-4">
         <h1 className="text-xl font-bold leading-[1.1] tracking-tighter text-center text-white">
-    Komuniko me Agjentin Inteligjent për cdo pyetje
+    Komuniko me Agjentin Inteligjent per cdo pyetje
 </h1>
           <main className={styles.main}>
             <div className={styles.cloud}>
@@ -286,35 +301,42 @@ export default function Home() {
                     name="userInput"
                     placeholder={
                       loading
-                        ? 'Duke kërkuar përgjigjen...'
-                        : 'Shkruaj këtu...'
+                        ? 'Duke kerkuar pergjigjen...'
+                        : 'Me bej pyetjen...  ?'
                     }
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     className={styles.textarea}
                   />
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className={styles.generatebutton}
-                  >
-                    {loading ? (
-                      <div className={styles.loadingwheel}>
-                        <LoadingDots color="#000" />
-                      </div>
-                    ) : (
-                      // Send icon SVG in input field
-                      <svg
-                        viewBox="0 0 20 20"
-                        className={styles.svgicon}
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
-                      </svg>
-                    )}
-                  </button>
-                </form>
-              </div>
+
+
+{loading ? (
+      <button
+        type="button"
+        onClick={handleStop}
+        className={styles.generatebutton}
+      >
+        Stop
+      </button>
+    ) : (
+      <button
+        type="submit"
+        disabled={loading}
+        className={styles.generatebutton}
+      >
+        <svg
+          viewBox="0 0 20 20"
+          className={styles.svgicon}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
+        </svg>
+      </button>
+    )}
+  </form>
+</div>
+
+
             </div>
             {error && (
               <div className="border border-red-400 rounded-md p-4">
@@ -324,6 +346,9 @@ export default function Home() {
           </main>
         </div>
         <footer className="m-auto p-1">
+          {/* <a href="https://kleialiaj.vercel.app/">
+            Powered by AI. Demo built by Klei.
+          </a> */}
         </footer>
       </Layout>
     </>
