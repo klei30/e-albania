@@ -38,7 +38,7 @@ export const makeChain = (
     });
     const docChain = loadQAChain(
       new OpenAIChat({
-        modelName: 'gpt-4',//change this to older versions (e.g. gpt-3.5-turbo) or (gpt-4) 
+        modelName: 'gpt-3.5-turbo', //change this to gpt-4 if you have access    
         maxTokens:1000,
       streaming: Boolean(onTokenStream),
       callbackManager: onTokenStream
