@@ -301,7 +301,7 @@ export default function Home() {
                     name="userInput"
                     placeholder={
                       loading
-                        ? 'Duke kerkuar pergjigjen...'
+                        ? 'Duke menduar pergjigjen...'
                         : 'Me bej pyetjen...  ?'
                     }
                     value={query}
